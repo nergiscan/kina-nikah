@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nergis & Can | 23.05.2026</title>
+<title>Nergis & Can</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
@@ -30,24 +30,24 @@
     padding: 40px 28px 60px;
     text-align: center;
   }
-  .label {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 20px;
-    letter-spacing: 4px;
-    color: #8a7f70;
+  .event-block { margin-bottom: 46px; }
+  .event-block.done .countdown { opacity: 0.5; }
+  .event-date {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: #a59a88;
+    margin-bottom: 14px;
     text-transform: uppercase;
-    margin-bottom: 22px;
   }
   .countdown {
     display: flex;
     justify-content: center;
     gap: 14px;
-    margin-bottom: 46px;
   }
   .unit { min-width: 62px; }
   .num {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 42px;
+    font-size: 38px;
     font-weight: 400;
     color: #6b6357;
     line-height: 1;
@@ -59,11 +59,21 @@
     text-transform: uppercase;
     margin-top: 6px;
   }
-  .divider {
-    width: 40px;
+  .done-badge {
+    display: none;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: #a59a88;
+    padding: 12px 0;
+  }
+  .event-block.done .countdown { display: none; }
+  .event-block.done .done-badge { display: block; }
+  .separator {
+    width: 60px;
     height: 1px;
-    background: #c9bda8;
-    margin: 0 auto 30px;
+    background: #d4c9b5;
+    margin: 0 auto 36px;
   }
   .location-name {
     font-family: 'Cormorant Garamond', serif;
@@ -111,8 +121,14 @@
     background: #b8a890;
     color: #fbf7f0;
   }
+  .divider {
+    width: 40px;
+    height: 1px;
+    background: #c9bda8;
+    margin: 10px auto 30px;
+  }
   @media (max-width: 420px) {
-    .num { font-size: 34px; }
+    .num { font-size: 32px; }
     .unit { min-width: 52px; }
     .countdown { gap: 8px; }
     .map-wrap iframe { height: 220px; }
@@ -124,12 +140,31 @@
     <img src="davetiye.png" alt="Nergis & Can Davetiye" class="invite-image">
 
     <div class="info">
-      <div class="label">Nikaha Kalan</div>
-      <div class="countdown">
-        <div class="unit"><div class="num" id="days">00</div><div class="unit-label">Gün</div></div>
-        <div class="unit"><div class="num" id="hours">00</div><div class="unit-label">Saat</div></div>
-        <div class="unit"><div class="num" id="minutes">00</div><div class="unit-label">Dakika</div></div>
-        <div class="unit"><div class="num" id="seconds">00</div><div class="unit-label">Saniye</div></div>
+
+      <!-- KINA -->
+      <div class="event-block" id="kina-block">
+        <div class="event-date">Kına · 22 Mayıs 2026 · 19:00</div>
+        <div class="countdown">
+          <div class="unit"><div class="num" id="kina-days">00</div><div class="unit-label">Gün</div></div>
+          <div class="unit"><div class="num" id="kina-hours">00</div><div class="unit-label">Saat</div></div>
+          <div class="unit"><div class="num" id="kina-minutes">00</div><div class="unit-label">Dakika</div></div>
+          <div class="unit"><div class="num" id="kina-seconds">00</div><div class="unit-label">Saniye</div></div>
+        </div>
+        <div class="done-badge">Kına tamamlandı ✓</div>
+      </div>
+
+      <div class="separator"></div>
+
+      <!-- NIKAH -->
+      <div class="event-block" id="nikah-block">
+        <div class="event-date">Nikah · 23 Mayıs 2026 · 17:30</div>
+        <div class="countdown">
+          <div class="unit"><div class="num" id="nikah-days">00</div><div class="unit-label">Gün</div></div>
+          <div class="unit"><div class="num" id="nikah-hours">00</div><div class="unit-label">Saat</div></div>
+          <div class="unit"><div class="num" id="nikah-minutes">00</div><div class="unit-label">Dakika</div></div>
+          <div class="unit"><div class="num" id="nikah-seconds">00</div><div class="unit-label">Saniye</div></div>
+        </div>
+        <div class="done-badge">Nikah tamamlandı ✓</div>
       </div>
 
       <div class="divider"></div>
@@ -139,7 +174,7 @@
 
       <div class="map-wrap">
         <iframe
-          src="https://maps.google.com/maps?q=36.861392,30.728644&hl=tr&z=16&output=embed"
+          src="https://maps.google.com/maps?q=Antalya+Kartpostal%C4%B1+%C5%9Eirinyal%C4%B1+Muratpa%C5%9Fa&hl=tr&z=17&output=embed"
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
           allowfullscreen></iframe>
@@ -150,14 +185,16 @@
   </div>
 
 <script>
-  const targetDate = new Date('2026-05-23T17:30:00+03:00').getTime();
+  const kinaDate  = new Date('2026-05-22T19:00:00+03:00').getTime();
+  const nikahDate = new Date('2026-05-23T17:30:00+03:00').getTime();
 
-  function updateCountdown() {
+  function updatePair(target, prefix, blockId) {
     const now = new Date().getTime();
-    const diff = targetDate - now;
+    const diff = target - now;
+    const block = document.getElementById(blockId);
 
     if (diff <= 0) {
-      ['days','hours','minutes','seconds'].forEach(id => document.getElementById(id).textContent = '00');
+      block.classList.add('done');
       return;
     }
 
@@ -166,14 +203,19 @@
     const minutes = Math.floor((diff % 3600000) / 60000);
     const seconds = Math.floor((diff % 60000) / 1000);
 
-    document.getElementById('days').textContent = String(days).padStart(2, '0');
-    document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-    document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-    document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+    document.getElementById(prefix + '-days').textContent = String(days).padStart(2, '0');
+    document.getElementById(prefix + '-hours').textContent = String(hours).padStart(2, '0');
+    document.getElementById(prefix + '-minutes').textContent = String(minutes).padStart(2, '0');
+    document.getElementById(prefix + '-seconds').textContent = String(seconds).padStart(2, '0');
   }
 
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
+  function updateAll() {
+    updatePair(kinaDate, 'kina', 'kina-block');
+    updatePair(nikahDate, 'nikah', 'nikah-block');
+  }
+
+  updateAll();
+  setInterval(updateAll, 1000);
 </script>
 </body>
 </html>
